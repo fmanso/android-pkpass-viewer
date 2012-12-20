@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyTickets</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_upcoming_events">UpcomingEventsActivity</string>
+    <string name="title_activity_view_ticket">ViewTicketActivity</string>
+    <string name="title_activity_view_ticket_back">ViewTicketBackActivity</string>
+
+</resources>
