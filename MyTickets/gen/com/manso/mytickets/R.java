@@ -221,8 +221,8 @@ containing a value of this type.
     public static final class id {
         public static final int alignBounds=0x7f040002;
         public static final int alignMargins=0x7f040003;
-        public static final int auxiliaryFieldsLinearLayout=0x7f040017;
-        public static final int barcodeImageView=0x7f040018;
+        public static final int auxiliaryFieldsLinearLayout=0x7f040016;
+        public static final int barcodeImageView=0x7f040017;
         public static final int bottom=0x7f040005;
         public static final int center=0x7f04000c;
         public static final int center_horizontal=0x7f04000a;
@@ -230,27 +230,25 @@ containing a value of this type.
         public static final int clip_horizontal=0x7f04000f;
         public static final int clip_vertical=0x7f04000e;
         public static final int containerLayout=0x7f040012;
-        public static final int containerLinearLayout=0x7f040013;
         public static final int end=0x7f040011;
         public static final int fill=0x7f04000d;
         public static final int fill_horizontal=0x7f04000b;
         public static final int fill_vertical=0x7f040009;
-        public static final int headerText=0x7f040014;
+        public static final int headerText=0x7f040013;
         public static final int horizontal=0x7f040000;
         public static final int left=0x7f040006;
-        public static final int menu_settings=0x7f040019;
-        public static final int primaryFieldsLinearLayout=0x7f040015;
+        public static final int menu_settings=0x7f040018;
+        public static final int primaryFieldsLinearLayout=0x7f040014;
         public static final int right=0x7f040007;
-        public static final int secondaryFieldsLinearLayout=0x7f040016;
+        public static final int secondaryFieldsLinearLayout=0x7f040015;
         public static final int start=0x7f040010;
         public static final int top=0x7f040004;
         public static final int vertical=0x7f040001;
     }
     public static final class layout {
-        public static final int activity_view_ticket_back=0x7f030000;
-        public static final int activity_view_ticket_front=0x7f030001;
-        public static final int fragment_ticket_back=0x7f030002;
-        public static final int fragment_ticket_front=0x7f030003;
+        public static final int activity_view_ticket=0x7f030000;
+        public static final int fragment_ticket_back=0x7f030001;
+        public static final int fragment_ticket_front=0x7f030002;
     }
     public static final class menu {
         public static final int activity_upcoming_events=0x7f080000;
