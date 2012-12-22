@@ -20,8 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-public class AsyncPkPassReader extends AsyncTask<Intent, Void, EventTicket> {
-	PkpassReader innerReader = new PkpassReader();
+public class AsyncPkPassReader extends AsyncTask<Intent, Void, String> {	
 	private ViewTicketFrontActivity activity;
 	private InputStream stream;
 	
@@ -30,7 +29,7 @@ public class AsyncPkPassReader extends AsyncTask<Intent, Void, EventTicket> {
 	}
 	
 	@Override
-	protected EventTicket doInBackground(Intent... arg0) {
+	protected String doInBackground(Intent... arg0) {
 		Intent intent = arg0[0];		
 		Uri u = intent.getData();
 		String scheme = u.getScheme();		
@@ -55,32 +54,31 @@ public class AsyncPkPassReader extends AsyncTask<Intent, Void, EventTicket> {
 			}
 		}	
 		
-		EventTicket t = null;
+		String t = null;
 		
 		try {
 			PassStorageService storageService = new PassStorageService(this.activity);
 			File dir = storageService.InflatePkPassInTempDir(this.stream);
 			this.stream.close();
-			t = innerReader.readTicket(dir);
+			t = dir.getPath();
 		} catch (IOException e) { 
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
-		} catch (WriterException e) {
-			e.printStackTrace();
-		}		
+		}
 		
 		return t;
 	}
 	
 	@Override
-	protected void onPostExecute(EventTicket ticket) {
+	protected void onPostExecute(String ticket) {
 		try {
 			this.stream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		activity.setTicket(ticket);
 	}
 

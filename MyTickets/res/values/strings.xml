@@ -7,5 +7,6 @@
     <string name="title_activity_upcoming_events">UpcomingEventsActivity</string>
     <string name="title_activity_view_ticket">ViewTicketActivity</string>
     <string name="title_activity_view_ticket_back">ViewTicketBackActivity</string>
+    <string name="barcode_image_description">Barcode image</string>
 
 </resources>

@@ -20,7 +20,7 @@ public class ViewTicketBackActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_ticket_back);
 		
-		this.linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
+		// this.linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
 		
 		drawBackFields();
 	}
