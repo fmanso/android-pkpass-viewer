@@ -1,5 +1,8 @@
 package com.manso.mytickets;
 
+import java.io.File;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,7 +11,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
+import com.manso.mytickets.services.ManifestService;
 import com.manso.pkpassutils.AsyncPkPassReader;
 
 public class ViewTicketFrontActivity extends FragmentActivity {
@@ -60,13 +65,26 @@ public class ViewTicketFrontActivity extends FragmentActivity {
 		this.handleIntent(intent);
 	}
 		
-	private void handleIntent(Intent intent) {				
+	private void handleIntent(Intent intent) {							
 		AsyncPkPassReader pkpassReader = new AsyncPkPassReader(this);		
 		pkpassReader.execute(intent);		
 	}	
 
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
+		
+		ManifestService ms = new ManifestService();
+		
+		if (!ms.check(new File(ticket))) 
+		{
+			Context ctx = getApplicationContext();
+			CharSequence text = "Pass is not ok";
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(ctx, text, duration);
+			toast.show();
+			return;
+		}		
+		
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		TicketFrontFragment ticketFront = TicketFrontFragment.newInstance(ticket);
