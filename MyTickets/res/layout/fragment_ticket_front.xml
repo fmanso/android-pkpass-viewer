@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     >
+    android:padding="10dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,21 +15,48 @@
 	        android:layout_height="wrap_content"               
 	        android:textAppearance="?android:attr/textAppearanceLarge" >
 	    </TextView>
-	
+
 	    <LinearLayout
-	        android:id="@+id/primaryFieldsLinearLayout"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical" >
-	
-	    </LinearLayout>
-	    
-	    <LinearLayout
-	        android:id="@+id/secondaryFieldsLinearLayout"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical" >
-	
+	        android:layout_height="wrap_content" android:baselineAligned="false">
+
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_weight="0.8"
+	            android:orientation="vertical" >
+
+	            <LinearLayout
+	                android:id="@+id/primaryFieldsLinearLayout"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:orientation="vertical" >
+	            </LinearLayout>
+
+	            <LinearLayout
+	                android:id="@+id/secondaryFieldsLinearLayout"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:orientation="vertical" >
+	            </LinearLayout>
+	        </LinearLayout>
+
+	        <RelativeLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_weight="0.2" >
+
+	            <ImageView
+	                android:id="@+id/thumbnailImageView"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentTop="true"
+	                android:contentDescription="@string/icon"
+	                android:maxHeight="90dp"
+	                android:maxWidth="90dp" />
+
+	        </RelativeLayout>
+
 	    </LinearLayout>
 	    
 	    <LinearLayout

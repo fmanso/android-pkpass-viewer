@@ -1,8 +1,9 @@
 package com.manso.mytickets;
 
-import java.io.File;
 import java.io.IOException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import android.graphics.Typeface;
@@ -15,10 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.zxing.WriterException;
-import com.manso.mytickets.domain.EventTicket;
-import com.manso.mytickets.domain.StandardField;
-import com.manso.pkpassutils.PkpassReader;
+import com.manso.mytickets.services.PassReadingService;
 
 public class TicketBackFragment extends Fragment {
 
@@ -32,23 +30,22 @@ public class TicketBackFragment extends Fragment {
 		return ticketBack;
 	}
 
-	private EventTicket ticket;
+	
 	private LinearLayout linearLayout;
+	private PassReadingService passReadingService;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {		
+			Bundle savedInstanceState) {				
 		
+		String path = this.getArguments().getString("ticketPath");
 		try {
-			String path = this.getArguments().getString("ticketPath");
-			this.ticket = new PkpassReader().readTicket(new File(path));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		} catch (WriterException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}			
+			this.passReadingService = new PassReadingService(path, this.getActivity());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 		
 		View view = inflater.inflate(R.layout.fragment_ticket_back, container, false);		
 		this.linearLayout = (LinearLayout) view.findViewById(R.id.containerLayout);
@@ -60,22 +57,23 @@ public class TicketBackFragment extends Fragment {
 	
 	private void drawBackFields() {		
 		
-		StandardField[] backFields = ticket.getBackFields();
-		for(int i = 0; i < backFields.length; i++)
-		{
-			StandardField backField = backFields[i];
+		JSONObject eventTicket = this.passReadingService.getJSONObject("eventTicket");
+		JSONArray backFields = (JSONArray) eventTicket.get("backFields");
+		
+		for (Object obj : backFields) {
+			JSONObject jsonBackfield = (JSONObject)obj;
+			
 			TextView title = new TextView(this.getActivity());
 			title.setTypeface(null, Typeface.BOLD);
-			title.setText(backField.getLabel());
+			title.setText(jsonBackfield.get("label").toString());
 			
 			TextView body = new TextView(this.getActivity());
-			body.setText(backField.getValue());
+			body.setText(jsonBackfield.get("value").toString());
 			
 			this.linearLayout.addView(title);
 			this.linearLayout.addView(body);
 			Space space = new Space(this.getActivity());
 			this.linearLayout.addView(space);
-			
 		}
 	}
 

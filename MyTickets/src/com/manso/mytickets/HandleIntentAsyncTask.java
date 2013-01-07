@@ -1,4 +1,4 @@
-package com.manso.pkpassutils;
+package com.manso.mytickets;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,21 +10,18 @@ import java.net.URLConnection;
 
 import org.json.simple.parser.ParseException;
 
-import com.google.zxing.WriterException;
-import com.manso.mytickets.ViewTicketFrontActivity;
-import com.manso.mytickets.domain.EventTicket;
-import com.manso.mytickets.services.PassStorageService;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-public class AsyncPkPassReader extends AsyncTask<Intent, Void, String> {	
+import com.manso.mytickets.services.PassStorageService;
+
+public class HandleIntentAsyncTask extends AsyncTask<Intent, Void, String> {	
 	private ViewTicketFrontActivity activity;
 	private InputStream stream;
 	
-	public AsyncPkPassReader(ViewTicketFrontActivity activity) {
+	public HandleIntentAsyncTask(ViewTicketFrontActivity activity) {
 		this.activity = activity;
 	}
 	
@@ -37,7 +34,6 @@ public class AsyncPkPassReader extends AsyncTask<Intent, Void, String> {
 			try {
 				this.stream = this.activity.getContentResolver().openInputStream(u);				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (scheme.equals("http")) {
@@ -46,13 +42,17 @@ public class AsyncPkPassReader extends AsyncTask<Intent, Void, String> {
 				URLConnection urlConnection = url.openConnection();
 				this.stream = urlConnection.getInputStream();
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}	
+		} else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+			try {
+				this.stream = this.activity.getContentResolver().openInputStream(u);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		String t = null;
 		
@@ -71,15 +71,14 @@ public class AsyncPkPassReader extends AsyncTask<Intent, Void, String> {
 	}
 	
 	@Override
-	protected void onPostExecute(String ticket) {
+	protected void onPostExecute(String path) {
 		try {
 			this.stream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		activity.setTicket(ticket);
+		activity.OnPassReady(path);
 	}
 
 }

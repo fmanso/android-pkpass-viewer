@@ -1,6 +1,5 @@
 package com.manso.mytickets.services;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,16 +9,12 @@ import java.util.zip.ZipInputStream;
 
 import org.json.simple.parser.ParseException;
 
-import com.manso.mytickets.utils.RandomNameGenerator;
-import com.manso.pkpassutils.PkpassReader;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
+import com.manso.mytickets.utils.RandomNameGenerator;
 
 public class PassStorageService {
 	Context context;
-	PkpassReader pkpassReader = new PkpassReader();
 
 	public PassStorageService(Context context) {
 		super();
