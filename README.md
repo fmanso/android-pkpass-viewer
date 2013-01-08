@@ -1,11 +1,12 @@
 android-pkpass-viewer
 =====================
 
-This is a personal project I made during christmas of 2012. 
+I spent some time during 2012 christmas in training my Android skills. I wrote a simple pkpass file viewer. It only supports event ticket types, but there should be enough code to support easily the other types.
 
-It is a viewer for pkpass file format. 
+Note that this is only a viewer, there is no support for push notifications or other functionality from pkpass.
 
-Note that it only supports event ticket pkpass type. Other types are not supported. But supporting it should be straightforward.
-
-This is my first open source project and first time I work with git. If something is wrong, contact me.
+The features are:
+* It draws the event ticket on the screen
+* It checks the integrity of the files using the SHA1 hash of the manifest file.
+* It does not check the cryptographic signature
 
