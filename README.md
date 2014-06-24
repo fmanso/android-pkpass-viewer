@@ -10,3 +10,4 @@ The features are:
 * It checks the integrity of the files using the SHA1 hash of the manifest file.
 * It does not check the cryptographic signature
 
+Software is License under MIT License, check License file
